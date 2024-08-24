@@ -3,7 +3,7 @@ const indexController = require("../controllers/indexController");
 const indexRouter = Router();
 
 indexRouter.get("/", (req, res) => {
-  console.log("index router");
+  res.render("index");
 });
 
 // indexRouter.post("/new", indexController.createUsernamePost);

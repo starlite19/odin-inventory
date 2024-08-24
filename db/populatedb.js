@@ -21,9 +21,10 @@ VALUES
 CREATE TABLE IF NOT EXISTS backpack (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name VARCHAR (255) NOT NULL,
-  company_id INTEGER FOREIGN KEY REFERENCES company(id),
+  company_id INTEGER,
   type VARCHAR (255) NOT NULL,
-  volume DECIMAL(3, 1)
+  volume DECIMAL(3, 1),
+  FOREIGN KEY (company_id) REFERENCES company(id)
 );
 
 INSERT INTO backpack (name, company_id, type, volume) 

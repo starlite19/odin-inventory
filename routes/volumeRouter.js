@@ -2,8 +2,8 @@ const { Router } = require("express");
 const volumeController = require("../controllers/volumeController");
 const volumeRouter = Router();
 
-volumeRouter.get("/", (req, res) => {
-  console.log("volume router");
-});
+volumeRouter.get("/", volumeController.getVolumes);
+
+volumeRouter.get("/:vol", volumeController.getBackpackByVolume);
 
 module.exports = volumeRouter;

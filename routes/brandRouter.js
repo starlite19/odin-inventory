@@ -2,8 +2,8 @@ const { Router } = require("express");
 const brandController = require("../controllers/brandController");
 const brandRouter = Router();
 
-brandRouter.get("/", (req, res) => {
-  console.log("brand router");
-});
+brandRouter.get("/", brandController.getBrands);
+
+brandRouter.get("/:brand", brandController.getBackpackByBrand);
 
 module.exports = brandRouter;

@@ -2,8 +2,8 @@ const { Router } = require("express");
 const typeController = require("../controllers/typeController");
 const typeRouter = Router();
 
-typeRouter.get("/", (req, res) => {
-  console.log("type router");
-});
+typeRouter.get("/", typeController.getTypes);
+
+typeRouter.get("/:type", typeController.getBackpackByType);
 
 module.exports = typeRouter;

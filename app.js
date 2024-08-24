@@ -13,9 +13,9 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use("/", indexRouter);
-app.use("/brand", brandRouter);
-app.use("/type", typeRouter);
-app.use("/volume", volumeRouter);
+app.use("/brands", brandRouter);
+app.use("/types", typeRouter);
+app.use("/volumes", volumeRouter);
 app.use("/backpacks", backpackRouter);
 
 const PORT = 3000;
