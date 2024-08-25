@@ -1,4 +1,4 @@
-const db = require("../db/queries");
+const db = require("../db/read-queries");
 
 async function getVolumes(req, res) {
   const volumes = await db.getAllVolumes();

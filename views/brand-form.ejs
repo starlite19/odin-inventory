@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Add Brand</title>
+</head>
+
+<body>
+  <h2>Add a brand</h2>
+  <%- include("errors.ejs") %>
+  <form action="/brands/create" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <label for="country">Country Code:</label>
+    <input type="text" name="country" id="country">
+    <button type="submit">Submit</button>
+  </form>
+</body>
+
+</html>

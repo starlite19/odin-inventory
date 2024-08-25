@@ -68,19 +68,22 @@ async function getVolumeById(id) {
   return rows;
 }
 
-// CREATE FUNCTIONS
-async function insertType(type) {
-  await pool.query("INSERT INTO type (name) VALUES ($1)", [type]);
+async function getTypeByName(name) {
+  const { rows } = await pool.query(
+    "SELECT * FROM type WHERE LOWER(name) = LOWER($1)",
+    [name]
+  );
+  return rows;
 }
 
-async function insertBrand(name, country) {
-  await pool.query("INSERT INTO company (name, country) VALUES ($1, $2)", [
-    name,
-    country,
-  ]);
+async function getBrandByValues(name, country) {
+  const { rows } = await pool.query(
+    "SELECT * FROM company WHERE LOWER(name) = LOWER($1) AND country = ($2)",
+    [name, country]
+  );
+  return rows;
 }
 
-async function insertBackpack() {}
 module.exports = {
   getAllTypes,
   getAllBackpacks,
@@ -93,9 +96,6 @@ module.exports = {
   getBrandById,
   getTypeById,
   getVolumeById,
+  getTypeByName,
+  getBrandByValues,
 };
-
-// company
-// type
-// backpack
-// volume

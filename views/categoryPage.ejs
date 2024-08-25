@@ -13,6 +13,7 @@
     <%- include('volume', {url: url, category: category}); %>
     <% }); %>
     <% } else { %>
+    <a href="<%= url %>/create">Add a <%= add %></a>
     <% categories.forEach( category => { %>
     <%- include('category', {url: url, category: category}); %>
     <% }); %>

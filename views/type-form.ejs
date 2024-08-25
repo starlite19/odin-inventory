@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Add Type</title>
+</head>
+
+<body>
+  <h2>Add a type</h2>
+  <%- include("errors.ejs") %>
+  <form action="/types/create" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+
+</html>

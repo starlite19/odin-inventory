@@ -4,7 +4,8 @@ const SQL = `
 CREATE TABLE IF NOT EXISTS company (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name VARCHAR (255) NOT NULL,
-  country CHAR (3)
+  country CHAR (3),
+  UNIQUE (name, country)
 );
 
 INSERT INTO company (name, country) 
@@ -24,7 +25,8 @@ CREATE TABLE IF NOT EXISTS backpack (
   company_id INTEGER,
   type VARCHAR (255) NOT NULL,
   volume DECIMAL(3, 1),
-  FOREIGN KEY (company_id) REFERENCES company(id)
+  FOREIGN KEY (company_id) REFERENCES company(id),
+  UNIQUE (name, company_id, type, volume)
 );
 
 INSERT INTO backpack (name, company_id, type, volume) 
@@ -63,7 +65,8 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS type (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  name VARCHAR (255) NOT NULL
+  name VARCHAR (255) NOT NULL,
+  UNIQUE (name)
 );
 
 INSERT INTO type (name) 
