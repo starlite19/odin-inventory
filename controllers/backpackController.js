@@ -1,6 +1,7 @@
 const read_db = require("../db/read-queries");
 const create_db = require("../db/create-queries");
 const update_db = require("../db/update-queries");
+const delete_db = require("../db/delete-queries");
 
 const { body, validationResult } = require("express-validator");
 
@@ -146,6 +147,12 @@ async function updateBackpack(req, res) {
   res.redirect("/backpacks");
 }
 
+async function deleteBackpack(req, res) {
+  const backpackId = req.params.backpack;
+  await delete_db.deleteBackpack(backpackId);
+  res.redirect("/backpacks");
+}
+
 module.exports = {
   getBackpacks,
   getBackpackById,
@@ -154,4 +161,5 @@ module.exports = {
   getCreateBackpack,
   getUpdateBackpack,
   updateBackpack,
+  deleteBackpack,
 };

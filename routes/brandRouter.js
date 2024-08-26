@@ -18,4 +18,6 @@ brandRouter.post(
   brandController.updateBrand
 );
 
+brandRouter.get("/:brand/delete", brandController.deleteBrand);
+
 module.exports = brandRouter;

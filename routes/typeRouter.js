@@ -18,4 +18,6 @@ typeRouter.post(
   typeController.updateType
 );
 
+typeRouter.get("/:type/delete", typeController.deleteType);
+
 module.exports = typeRouter;

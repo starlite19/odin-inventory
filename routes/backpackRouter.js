@@ -18,4 +18,6 @@ backpackRouter.post(
   backpackController.updateBackpack
 );
 
+backpackRouter.get("/:backpack/delete", backpackController.deleteBackpack);
+
 module.exports = backpackRouter;

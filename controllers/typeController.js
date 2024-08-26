@@ -1,6 +1,7 @@
 const read_db = require("../db/read-queries");
 const create_db = require("../db/create-queries");
 const update_db = require("../db/update-queries");
+const delete_db = require("../db/delete-queries");
 
 const { body, validationResult } = require("express-validator");
 
@@ -78,6 +79,30 @@ async function updateType(req, res) {
   res.redirect("/types");
 }
 
+async function deleteType(req, res) {
+  const typeId = req.params.type;
+  const type = await read_db.getTypeById(typeId);
+  const backpacks = await read_db.getBackpackByType(type[0].name);
+  const types = await read_db.getAllTypes();
+
+  if (backpacks?.length !== 0) {
+    return res.status(400).render("categoryPage", {
+      title: "Types",
+      heading: "Types",
+      categories: types,
+      url: "/types",
+      add: "type",
+      errors: [
+        {
+          msg: `Cannot delete - TYPE: ${type[0].name}. Delete all associated backpacks first.`,
+        },
+      ],
+    });
+  }
+  await delete_db.deleteType(typeId);
+  res.redirect("/types");
+}
+
 module.exports = {
   getTypes,
   getBackpackByType,
@@ -86,4 +111,5 @@ module.exports = {
   getCreateType,
   getUpdateType,
   updateType,
+  deleteType,
 };

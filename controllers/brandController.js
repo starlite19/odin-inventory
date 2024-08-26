@@ -1,6 +1,7 @@
 const read_db = require("../db/read-queries");
 const create_db = require("../db/create-queries");
 const update_db = require("../db/update-queries");
+const delete_db = require("../db/delete-queries");
 
 const { body, validationResult } = require("express-validator");
 
@@ -98,6 +99,30 @@ async function updateBrand(req, res) {
   res.redirect("/brands");
 }
 
+async function deleteBrand(req, res) {
+  const brandId = req.params.brand;
+  const backpacks = await read_db.getBackpackByBrand(brandId);
+  const brand = await read_db.getBrandById(brandId);
+  const brands = await read_db.getAllBrands();
+
+  if (backpacks?.length !== 0) {
+    return res.status(400).render("categoryPage", {
+      title: "Brands",
+      heading: "Brands",
+      categories: brands,
+      url: "/brands",
+      add: "brand",
+      errors: [
+        {
+          msg: `Cannot delete - BRAND: ${brand[0].name}. Delete all associated backpacks first.`,
+        },
+      ],
+    });
+  }
+  await delete_db.deleteBrand(brandId);
+  res.redirect("/brands");
+}
+
 module.exports = {
   getBrands,
   getBackpackByBrand,
@@ -106,4 +131,5 @@ module.exports = {
   getCreateBrand,
   getUpdateBrand,
   updateBrand,
+  deleteBrand,
 };
