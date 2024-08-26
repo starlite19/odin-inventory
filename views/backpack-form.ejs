@@ -1,1 +1,32 @@
 <!-- use SELECT element in form -->
+<!DOCTYPE html>
+
+<head>
+  <title>Add Backpack</title>
+</head>
+
+<body>
+  <h2>Add a backpack</h2>
+  <%- include("errors.ejs") %>
+  <form action="/backpacks/create" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <label for="company">Company:</label>
+    <select id="company" name="company" required>
+      <% companies.forEach( company => { %>
+      <%- include('brand-option', { option: company }); %>
+      <% }); %>
+    </select>
+    <label for="type">Type:</label>
+    <select id="type" name="type" required>
+      <% types.forEach( type => { %>
+      <%- include('type-option', { option: type }); %>
+      <% }); %>
+    </select>
+    <label for="volume">Volume:</label>
+    <input type="number" min="0" max="70" step="0.5" name="volume" id="volume" required>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+
+</html>

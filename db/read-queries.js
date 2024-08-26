@@ -84,6 +84,14 @@ async function getBrandByValues(name, country) {
   return rows;
 }
 
+async function getBackpackByValues(name, company, type, volume) {
+  const { rows } = await pool.query(
+    "SELECT * FROM backpack WHERE LOWER(name) = LOWER($1) AND company_id = ($2) AND LOWER(type) = LOWER($3) AND volume = ($4)",
+    [name, company, type, volume]
+  );
+  return rows;
+}
+
 module.exports = {
   getAllTypes,
   getAllBackpacks,
@@ -98,4 +106,5 @@ module.exports = {
   getVolumeById,
   getTypeByName,
   getBrandByValues,
+  getBackpackByValues,
 };
