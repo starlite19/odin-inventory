@@ -1,5 +1,6 @@
 const read_db = require("../db/read-queries");
 const create_db = require("../db/create-queries");
+const update_db = require("../db/update-queries");
 
 const { body, validationResult } = require("express-validator");
 
@@ -18,11 +19,12 @@ async function getBackpackByType(req, res) {
   const typeId = req.params.type;
   const type = await read_db.getTypeById(typeId);
   const backpacks = await read_db.getBackpackByType(type[0].name);
-  res.render("backpackPage", {
+  res.render("categoryPage", {
     title: type[0].name,
     heading: type[0].name + " Backpacks",
-    backpacks: backpacks,
+    categories: backpacks,
     url: "/backpacks",
+    add: "backpack",
   });
 }
 
@@ -54,10 +56,34 @@ async function getCreateType(req, res) {
   res.render("type-form");
 }
 
+async function getUpdateType(req, res) {
+  const typeId = req.params.type;
+  const type = await read_db.getTypeById(typeId);
+  res.render("update-type-form", { id: typeId, name: type[0].name });
+}
+
+async function updateType(req, res) {
+  const errors = validationResult(req);
+  const typeId = req.params.type;
+  if (!errors.isEmpty()) {
+    const type = await read_db.getTypeById(typeId);
+    return res.status(400).render("update-type-form", {
+      id: typeId,
+      name: type[0].name,
+      errors: errors.array(),
+    });
+  }
+  const { name } = req.body;
+  await update_db.updateType(name, typeId);
+  res.redirect("/types");
+}
+
 module.exports = {
   getTypes,
   getBackpackByType,
   validateType,
   createType,
   getCreateType,
+  getUpdateType,
+  updateType,
 };

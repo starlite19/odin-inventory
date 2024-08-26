@@ -11,5 +11,11 @@ typeRouter.post(
 );
 
 typeRouter.get("/:type", typeController.getBackpackByType);
+typeRouter.get("/:type/update", typeController.getUpdateType);
+typeRouter.post(
+  "/:type/update",
+  typeController.validateType(),
+  typeController.updateType
+);
 
 module.exports = typeRouter;

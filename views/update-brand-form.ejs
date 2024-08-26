@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Update Brand</title>
+</head>
+
+<body>
+  <h2>Update brand</h2>
+  <%- include("errors.ejs") %>
+  <form action="/brands/<%= id %>/update" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value="<%= name %>" required>
+    <label for="country">Country Code:</label>
+    <input type="text" name="country" id="country" value="<%= country %>">
+    <button type="submit">Submit</button>
+  </form>
+</body>
+
+</html>

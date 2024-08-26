@@ -1,1 +1,2 @@
-<option value="<%= option.name %>"><%= option.name %></option>
+<% const effectiveType = typeof type !== 'undefined' ? type : null; %>
+<option value="<%= option.name %>" <% if (option.name == effectiveType) { %> selected <% } %>><%= option.name %></option>

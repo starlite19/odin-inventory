@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 
 <head>
-  <title>Add Backpack</title>
+  <title>Update Backpack</title>
 </head>
 
 <body>
-  <h2>Add a backpack</h2>
+  <h2>Update backpack</h2>
   <%- include("errors.ejs") %>
-  <form action="/backpacks/create" method="POST">
+  <form action="/backpacks/<%= id %>/update" method="POST">
     <label for="name">Name:</label>
-    <input type="text" name="name" id="name" required>
+    <input type="text" name="name" id="name" value="<%= name %>" required>
     <label for="company">Company:</label>
     <select id="company" name="company" required>
       <% companies.forEach( company => { %>
-      <%- include('brand-option', { option: company }); %>
+      <%- include('brand-option', { option: company, brand: brand }); %>
       <% }); %>
     </select>
     <label for="type">Type:</label>
     <select id="type" name="type" required>
       <% types.forEach( type => { %>
-      <%- include('type-option', { option: type }); %>
+      <%- include('type-option', { option: type, type: bagType }); %>
       <% }); %>
     </select>
     <label for="volume">Volume:</label>
-    <input type="number" min="0" max="70" step="0.5" name="volume" id="volume" required>
+    <input type="number" min="0" max="70" step="0.5" name="volume" id="volume" value="<%= volume %>" required>
     <button type="submit">Submit</button>
   </form>
 </body>

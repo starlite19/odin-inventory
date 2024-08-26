@@ -11,5 +11,11 @@ brandRouter.post(
 );
 
 brandRouter.get("/:brand", brandController.getBackpackByBrand);
+brandRouter.get("/:brand/update", brandController.getUpdateBrand);
+brandRouter.post(
+  "/:brand/update",
+  brandController.validateBrand(),
+  brandController.updateBrand
+);
 
 module.exports = brandRouter;

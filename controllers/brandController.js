@@ -1,5 +1,6 @@
 const read_db = require("../db/read-queries");
 const create_db = require("../db/create-queries");
+const update_db = require("../db/update-queries");
 
 const { body, validationResult } = require("express-validator");
 
@@ -18,11 +19,12 @@ async function getBackpackByBrand(req, res) {
   const brandId = req.params.brand;
   const backpacks = await read_db.getBackpackByBrand(brandId);
   const brand = await read_db.getBrandById(brandId);
-  res.render("backpackPage", {
+  res.render("categoryPage", {
     title: brand[0].name,
     heading: brand[0].name + " Backpacks",
-    backpacks: backpacks,
+    categories: backpacks,
     url: "/backpacks",
+    add: "backpack",
   });
 }
 
@@ -58,10 +60,50 @@ async function getCreateBrand(req, res) {
   res.render("brand-form");
 }
 
+async function getUpdateBrand(req, res) {
+  const brandId = req.params.brand;
+  const brand = await read_db.getBrandById(brandId);
+  res.render("update-brand-form", {
+    id: brandId,
+    name: brand[0].name,
+    country: brand[0].country,
+  });
+}
+
+async function updateBrand(req, res) {
+  const errors = validationResult(req);
+  const brandId = req.params.brand;
+  if (!errors.isEmpty()) {
+    const brand = await read_db.getBrandById(brandId);
+    return res.status(400).render("update-brand-form", {
+      id: brandId,
+      name: brand[0].name,
+      country: brand[0].country,
+      errors: errors.array(),
+    });
+  }
+
+  const { name, country } = req.body;
+  const brand = await read_db.getBrandByValues(name, country);
+  if (brand?.length !== 0) {
+    const brand = await read_db.getBrandById(brandId);
+    return res.status(400).render("update-brand-form", {
+      id: brandId,
+      name: brand[0].name,
+      country: brand[0].country,
+      errors: [{ msg: "Company already exists." }],
+    });
+  }
+  await update_db.updateBrand(name, country, brandId);
+  res.redirect("/brands");
+}
+
 module.exports = {
   getBrands,
   getBackpackByBrand,
   validateBrand,
   createBrand,
   getCreateBrand,
+  getUpdateBrand,
+  updateBrand,
 };

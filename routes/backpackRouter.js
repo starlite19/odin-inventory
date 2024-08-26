@@ -11,5 +11,11 @@ backpackRouter.post(
 );
 
 backpackRouter.get("/:backpack", backpackController.getBackpackById);
+backpackRouter.get("/:backpack/update", backpackController.getUpdateBackpack);
+backpackRouter.post(
+  "/:backpack/update",
+  backpackController.validateBackpack(),
+  backpackController.updateBackpack
+);
 
 module.exports = backpackRouter;

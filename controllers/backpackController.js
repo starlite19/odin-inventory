@@ -1,5 +1,6 @@
 const read_db = require("../db/read-queries");
 const create_db = require("../db/create-queries");
+const update_db = require("../db/update-queries");
 
 const { body, validationResult } = require("express-validator");
 
@@ -84,10 +85,73 @@ async function getCreateBackpack(req, res) {
   res.render("backpack-form", { companies: companies, types: types });
 }
 
+async function getUpdateBackpack(req, res) {
+  const backpackId = req.params.backpack;
+  const backpack = await read_db.getBackpackById(backpackId);
+  const companies = await read_db.getAllBrands();
+  const types = await read_db.getAllTypes();
+  res.render("update-backpack-form", {
+    id: backpackId,
+    name: backpack[0].name,
+    brand: backpack[0].company_id,
+    bagType: backpack[0].type,
+    volume: backpack[0].volume,
+    companies: companies,
+    types: types,
+  });
+}
+
+async function updateBackpack(req, res) {
+  const errors = validationResult(req);
+  const backpackId = req.params.backpack;
+  if (!errors.isEmpty()) {
+    const backpack = await read_db.getBackpackById(backpackId);
+    const companies = await read_db.getAllBrands();
+    const types = await read_db.getAllTypes();
+    return res.status(400).render("update-backpack-form", {
+      id: backpackId,
+      name: backpack[0].name,
+      brand: backpack[0].company_id,
+      bagType: backpack[0].type,
+      volume: backpack[0].volume,
+      companies: companies,
+      types: types,
+      errors: errors.array(),
+    });
+  }
+
+  const { name, company, type, volume } = req.body;
+  const backpack = await read_db.getBackpackByValues(
+    name,
+    company,
+    type,
+    volume
+  );
+  if (backpack?.length !== 0) {
+    const backpack = await read_db.getBackpackById(backpackId);
+    const companies = await read_db.getAllBrands();
+    const types = await read_db.getAllTypes();
+    return res.status(400).render("update-backpack-form", {
+      id: backpackId,
+      name: backpack[0].name,
+      brand: backpack[0].company_id,
+      bagType: backpack[0].type,
+      volume: backpack[0].volume,
+      companies: companies,
+      types: types,
+      errors: [{ msg: "Backpack already exists." }],
+    });
+  }
+  await update_db.updateBackpack(name, company, type, volume, backpackId);
+  res.redirect("/backpacks");
+}
+
 module.exports = {
   getBackpacks,
   getBackpackById,
   validateBackpack,
   createBackpack,
   getCreateBackpack,
+  getUpdateBackpack,
+  updateBackpack,
 };
