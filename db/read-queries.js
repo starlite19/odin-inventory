@@ -21,10 +21,11 @@ async function getAllVolumes() {
   return rows;
 }
 
-async function getBackpackByType(type) {
-  const { rows } = await pool.query("SELECT * FROM backpack WHERE type=($1)", [
-    type,
-  ]);
+async function getBackpackByType(type_id) {
+  const { rows } = await pool.query(
+    "SELECT * FROM backpack WHERE type_id=($1)",
+    [type_id]
+  );
   return rows;
 }
 
@@ -86,7 +87,7 @@ async function getBrandByValues(name, country) {
 
 async function getBackpackByValues(name, company, type, volume) {
   const { rows } = await pool.query(
-    "SELECT * FROM backpack WHERE LOWER(name) = LOWER($1) AND company_id = ($2) AND LOWER(type) = LOWER($3) AND volume = ($4)",
+    "SELECT * FROM backpack WHERE LOWER(name) = LOWER($1) AND company_id = ($2) AND type_id = ($3) AND volume = ($4)",
     [name, company, type, volume]
   );
   return rows;

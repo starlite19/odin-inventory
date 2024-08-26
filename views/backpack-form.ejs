@@ -13,13 +13,13 @@
     <label for="company">Company:</label>
     <select id="company" name="company" required>
       <% companies.forEach( company => { %>
-      <%- include('brand-option', { option: company }); %>
+      <%- include('option', { option: company }); %>
       <% }); %>
     </select>
     <label for="type">Type:</label>
     <select id="type" name="type" required>
       <% types.forEach( type => { %>
-      <%- include('type-option', { option: type }); %>
+      <%- include('option', { option: type }); %>
       <% }); %>
     </select>
     <label for="volume">Volume:</label>

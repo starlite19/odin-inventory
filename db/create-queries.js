@@ -12,10 +12,10 @@ async function insertBrand(name, country) {
   ]);
 }
 
-async function insertBackpack(name, company_id, type, vol) {
+async function insertBackpack(name, company_id, type_id, vol) {
   await pool.query(
-    "INSERT INTO backpack (name, company_id, type, volume) VALUES ($1, $2, $3, $4)",
-    [name, company_id, type, vol]
+    "INSERT INTO backpack (name, company_id, type_id, volume) VALUES ($1, $2, $3, $4)",
+    [name, company_id, type_id, vol]
   );
 }
 

@@ -19,7 +19,7 @@ async function getTypes(req, res) {
 async function getBackpackByType(req, res) {
   const typeId = req.params.type;
   const type = await read_db.getTypeById(typeId);
-  const backpacks = await read_db.getBackpackByType(type[0].name);
+  const backpacks = await read_db.getBackpackByType(typeId);
   res.render("categoryPage", {
     title: type[0].name,
     heading: type[0].name + " Backpacks",
@@ -82,7 +82,7 @@ async function updateType(req, res) {
 async function deleteType(req, res) {
   const typeId = req.params.type;
   const type = await read_db.getTypeById(typeId);
-  const backpacks = await read_db.getBackpackByType(type[0].name);
+  const backpacks = await read_db.getBackpackByType(typeId);
   const types = await read_db.getAllTypes();
 
   if (backpacks?.length !== 0) {

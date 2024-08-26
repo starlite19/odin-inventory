@@ -7,13 +7,6 @@ const { body, validationResult } = require("express-validator");
 
 async function getBackpacks(req, res) {
   const backpacks = await read_db.getAllBackpacks();
-  // res.render("backpackPage", {
-  //   title: "Backpacks",
-  //   heading: "All Backpacks",
-  //   backpacks: backpacks,
-  //   url: "/backpacks",
-  //   add: "backpack",
-  // });
   res.render("categoryPage", {
     title: "Backpacks",
     heading: "All Backpacks",
@@ -27,9 +20,11 @@ async function getBackpackById(req, res) {
   const backpackId = req.params.backpack;
   const backpack = await read_db.getBackpackById(backpackId);
   const brand = await read_db.getBrandById(backpack[0].company_id);
+  const type = await read_db.getTypeById(backpack[0].type_id);
   res.render("item", {
     backpack: backpack[0],
     company: brand[0],
+    type: type[0].name,
   });
 }
 
@@ -95,7 +90,7 @@ async function getUpdateBackpack(req, res) {
     id: backpackId,
     name: backpack[0].name,
     brand: backpack[0].company_id,
-    bagType: backpack[0].type,
+    bagType: backpack[0].type_id,
     volume: backpack[0].volume,
     companies: companies,
     types: types,
@@ -113,7 +108,7 @@ async function updateBackpack(req, res) {
       id: backpackId,
       name: backpack[0].name,
       brand: backpack[0].company_id,
-      bagType: backpack[0].type,
+      bagType: backpack[0].type_id,
       volume: backpack[0].volume,
       companies: companies,
       types: types,
@@ -136,7 +131,7 @@ async function updateBackpack(req, res) {
       id: backpackId,
       name: backpack[0].name,
       brand: backpack[0].company_id,
-      bagType: backpack[0].type,
+      bagType: backpack[0].type_id,
       volume: backpack[0].volume,
       companies: companies,
       types: types,
