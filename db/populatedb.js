@@ -95,7 +95,7 @@ async function main() {
   console.log("seeding...");
   const client = new Client({
     connectionString:
-      "postgresql://houangiv:peace1@localhost:5432/inventory_management",
+      "postgresql://<db_user>:<db_password>@localhost:5432/<database>",
   });
   await client.connect();
   await client.query(SQL);
