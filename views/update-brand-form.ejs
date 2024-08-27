@@ -2,17 +2,27 @@
 
 <head>
   <title>Update Brand</title>
+  <link rel="stylesheet" href="/form.css">
 </head>
 
 <body>
   <h2>Update brand</h2>
   <%- include("errors.ejs") %>
   <form action="/brands/<%= id %>/update" method="POST">
-    <label for="name">Name:</label>
+    <div class="info-item">
+      <label for="name">Name:</label>
     <input type="text" name="name" id="name" value="<%= name %>" required>
-    <label for="country">Country Code:</label>
+    </div>
+    
+    <div class="info-item">
+      <label for="country">Country Code:</label>
     <input type="text" name="country" id="country" value="<%= country %>">
-    <button type="submit">Submit</button>
+    </div>
+    
+    <div class="actions">
+      <button type="submit">Submit</button>
+      <a href="/brands" class="navigation">Back to brands</a>
+    </div>
   </form>
 </body>
 

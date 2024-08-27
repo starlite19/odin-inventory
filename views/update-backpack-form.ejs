@@ -2,29 +2,45 @@
 
 <head>
   <title>Update Backpack</title>
+  <link rel="stylesheet" href="/form.css">
 </head>
 
 <body>
   <h2>Update backpack</h2>
   <%- include("errors.ejs") %>
   <form action="/backpacks/<%= id %>/update" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" value="<%= name %>" required>
-    <label for="company">Company:</label>
-    <select id="company" name="company" required>
-      <% companies.forEach( company => { %>
-      <%- include('option', { option: company, value: brand }); %>
-      <% }); %>
-    </select>
-    <label for="type">Type:</label>
-    <select id="type" name="type" required>
-      <% types.forEach( type => { %>
-      <%- include('option', { option: type, value: bagType }); %>
-      <% }); %>
-    </select>
-    <label for="volume">Volume:</label>
-    <input type="number" min="0" max="70" step="0.5" name="volume" id="volume" value="<%= volume %>" required>
-    <button type="submit">Submit</button>
+    <div class="info-item">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" value="<%= name %>" required>
+    </div>
+
+    <div class="info-item">
+      <label for="company">Company:</label>
+      <select id="company" name="company" required>
+        <% companies.forEach( company => { %>
+        <%- include('option', { option: company, value: brand }); %>
+        <% }); %>
+      </select>
+    </div>
+
+    <div class="info-item">
+      <label for="type">Type:</label>
+      <select id="type" name="type" required>
+        <% types.forEach( type => { %>
+        <%- include('option', { option: type, value: bagType }); %>
+        <% }); %>
+      </select>
+    </div>
+
+    <div class="info-item">
+      <label for="volume">Volume:</label>
+      <input type="number" min="0" max="70" step="0.5" name="volume" id="volume" value="<%= volume %>" required>
+    </div>
+
+    <div class="actions">
+      <button type="submit">Submit</button>
+      <a href="/backpacks" class="navigation">Back to backpacks</a>
+    </div>
   </form>
 </body>
 

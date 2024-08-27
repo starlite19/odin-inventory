@@ -1,0 +1,72 @@
+.delete {
+    border: 1px solid #F2CFC2;
+    border-radius: 4px;
+    padding: 8px 16px;
+    background-color: #F2CFC2;
+    color: #373839;
+}
+
+.add, .update {
+    border: 1px solid #F87218;
+    border-radius: 4px;
+    padding: 8px 16px;
+    background-color: #F87218;
+    color: #F2EBE6;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+body {
+    text-align: center;
+    padding: 8px;
+    background-color: #F2EBE6;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, .name {
+    color: #373839;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+    border: 1px solid #8DAAA0;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.actions {
+    display: flex;
+    justify-content: left;
+    gap: 16px;
+}
+
+ul {
+    list-style-type: none;
+    color:#373839;
+    margin-bottom: 16px;
+    padding: 0;
+}
+
+.navigation {
+    border: 1px solid #BCD0CA;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: #BCD0CA;
+    color: #373839;
+}
+
+.item.single {
+    justify-content: center;
+}

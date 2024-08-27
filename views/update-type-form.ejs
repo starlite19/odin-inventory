@@ -2,15 +2,22 @@
 
 <head>
   <title>Update Type</title>
+  <link rel="stylesheet" href="/form.css">
 </head>
 
 <body>
   <h2>Update type</h2>
   <%- include("errors.ejs") %>
   <form action="/types/<%= id %>/update" method="POST">
-    <label for="name">Name:</label>
+    <div class="info-item">
+      <label for="name">Name:</label>
     <input type="text" name="name" id="name" value="<%= name %>" required>
-    <button type="submit">Submit</button>
+    </div>
+    
+    <div class="actions">
+      <button type="submit">Submit</button>
+      <a href="/types" class="navigation">Back to types</a>
+    </div>
   </form>
 </body>
 

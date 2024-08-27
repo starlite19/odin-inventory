@@ -1,0 +1,30 @@
+.button {
+    border: 1px solid #8DAAA0;
+    border-radius: 8px;
+    padding: 16px;
+    width: 100px;
+    background-color: #8DAAA0;
+    color: #F2EBE6;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+body {
+    text-align: center;
+    padding: 8px;
+    background-color: #F2EBE6;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2 {
+    color: #373839;
+}

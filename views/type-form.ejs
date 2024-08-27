@@ -2,15 +2,22 @@
 
 <head>
   <title>Add Type</title>
+  <link rel="stylesheet" href="/form.css">
 </head>
 
 <body>
   <h2>Add a type</h2>
   <%- include("errors.ejs") %>
   <form action="/types/create" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" required>
-    <button type="submit">Submit</button>
+    <div class="info-item">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required>
+    </div>
+
+    <div class="actions">
+      <button type="submit">Submit</button>
+      <a href="/types" class="navigation">Back to types</a>
+    </div>
   </form>
 </body>
 

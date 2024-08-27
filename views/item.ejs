@@ -3,16 +3,18 @@
 
 <head>
   <title><%= backpack.name %> - <%= company.name %></title>
+  <link rel="stylesheet" href="/item.css">
 </head>
 
 <body>
   <h1><%= company.name %> - <%= backpack.name %></h1>
   <div class="list">
-    <div>Name: <%= backpack.name %></div>
-    <div>Brand: <%= company.name %></div>
-    <div>Designed in: <%= company.country %></div>
-    <div>Type: <%= type %></div>
-    <div>Volume: <%= backpack.volume %>L</div>
+    <div class="item">Name: <%= backpack.name %></div>
+    <div class="item">Brand: <%= company.name %></div>
+    <div class="item">Designed in: <%= company.country %></div>
+    <div class="item">Type: <%= type %></div>
+    <div class="item">Volume: <%= backpack.volume %> L</div>
+    <a href="/" class="navigation">Back to backpacks</a>
   </div>
 </body>
 
