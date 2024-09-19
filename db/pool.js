@@ -1,5 +1,4 @@
 const { Pool } = require("pg");
-// const { env } = require('node:process');
 const { connectionString } = require("pg/lib/defaults");
 
 // All of the following properties should be read from environment variables
