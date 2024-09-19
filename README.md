@@ -1,5 +1,5 @@
 # ODIN Inventory Application
-Project deployed on
+Project deployed on https://odin-inventory-mb5u.onrender.com
 
 - Note that it may take a while to load because the application is asleep
 
@@ -10,7 +10,8 @@ This project demonstrates the concepts of building a basic Express app using the
 
 Functionality:
 - View backpacks based on certain categories
-- CRUD items and categories
+- CRUD items and categories (except volume)
 
 Missing functionality:
 - Cannot add an entire new category
+- Navigating using dedicated buttons may not be as intuitive (e.g. Back ____)
